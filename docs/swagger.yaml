@@ -1,0 +1,277 @@
+definitions:
+  handler.ErrorResponse:
+    properties:
+      message:
+        example: internal server error
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  handler.Response:
+    properties:
+      message:
+        type: string
+      result: {}
+      success:
+        type: boolean
+    type: object
+  model.Status:
+    enum:
+    - IN_PROGRESS
+    - COMPLETED
+    type: string
+    x-enum-varnames:
+    - IN_PROGRESS
+    - COMPLETED
+  service.CreateTodoRequest:
+    properties:
+      description:
+        type: string
+      image:
+        type: string
+      status:
+        enum:
+        - IN_PROGRESS
+        - COMPLETED
+        type: string
+      title:
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - description
+    - image
+    - status
+    - title
+    type: object
+  service.TodoResponse:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      status:
+        $ref: '#/definitions/model.Status'
+      title:
+        type: string
+    type: object
+  service.UpdateTodoRequest:
+    properties:
+      description:
+        type: string
+      image:
+        type: string
+      status:
+        enum:
+        - IN_PROGRESS
+        - COMPLETED
+        type: string
+      title:
+        maxLength: 100
+        minLength: 3
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /todo:
+    get:
+      consumes:
+      - application/json
+      description: retrieves a list of all todo tasks.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                result:
+                  items:
+                    $ref: '#/definitions/service.TodoResponse'
+                  type: array
+              type: object
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get all todo tasks
+      tags:
+      - todo
+    post:
+      consumes:
+      - application/json
+      description: insert todo task into the database.
+      parameters:
+      - description: create todo request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/service.CreateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                result:
+                  $ref: '#/definitions/service.TodoResponse'
+              type: object
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create todo task
+      tags:
+      - todo
+  /todo/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete todo task by ID from the database.
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete todo task by ID
+      tags:
+      - todo
+    get:
+      consumes:
+      - application/json
+      description: retrieve todo task by ID.
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                result:
+                  $ref: '#/definitions/service.TodoResponse'
+              type: object
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get todo task by ID
+      tags:
+      - todo
+    put:
+      consumes:
+      - application/json
+      description: update todo task by ID into the database.
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: update todo request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/service.UpdateTodoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            allOf:
+            - $ref: '#/definitions/handler.Response'
+            - properties:
+                result:
+                  $ref: '#/definitions/service.TodoResponse'
+              type: object
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update todo task by ID
+      tags:
+      - todo
+  /todo/{id}/completed:
+    patch:
+      consumes:
+      - application/json
+      description: set selected todo task to completed.
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Set todo task to completed
+      tags:
+      - todo
+  /todo/{id}/in-progress:
+    patch:
+      consumes:
+      - application/json
+      description: set selected todo task to in-progress.
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Error message
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Set todo task to in-progress
+      tags:
+      - todo
+swagger: "2.0"
