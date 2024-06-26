@@ -102,8 +102,8 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "List of todo items",
+                    "201": {
+                        "description": "Created todo task",
                         "schema": {
                             "allOf": [
                                 {
@@ -153,7 +153,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of todo items",
+                        "description": "Founded todo task",
                         "schema": {
                             "allOf": [
                                 {
@@ -210,7 +210,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of todo items",
+                        "description": "Updated todo task",
                         "schema": {
                             "allOf": [
                                 {
@@ -258,7 +258,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of todo items",
+                        "description": "Successful response",
                         "schema": {
                             "$ref": "#/definitions/handler.Response"
                         }
@@ -296,7 +296,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of todo items",
+                        "description": "Successful response",
                         "schema": {
                             "$ref": "#/definitions/handler.Response"
                         }
@@ -334,7 +334,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of todo items",
+                        "description": "Successful response",
                         "schema": {
                             "$ref": "#/definitions/handler.Response"
                         }

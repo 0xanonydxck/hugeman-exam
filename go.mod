@@ -10,8 +10,6 @@ require (
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/goccy/go-json v0.10.3
 	github.com/gofrs/uuid v4.4.0+incompatible
-	github.com/golang-migrate/migrate/v4 v4.17.1
-	github.com/lib/pq v1.10.9
 	github.com/rs/zerolog v1.33.0
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.9.0
@@ -37,8 +35,6 @@ require (
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
-	github.com/hashicorp/errwrap v1.1.0 // indirect
-	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect

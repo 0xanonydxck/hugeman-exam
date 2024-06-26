@@ -58,7 +58,7 @@ func (h *todoHandler) All(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path string true "Todo ID"
-// @Success 200 {object} Response{result=service.TodoResponse} "List of todo items"
+// @Success 200 {object} Response{result=service.TodoResponse} "Founded todo task"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo/{id} [get]
 func (h *todoHandler) Get(c *gin.Context) {
@@ -78,7 +78,7 @@ func (h *todoHandler) Get(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param request body service.CreateTodoRequest true "create todo request body"
-// @Success 200 {object} Response{result=service.TodoResponse} "List of todo items"
+// @Success 201 {object} Response{result=service.TodoResponse} "Created todo task"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo [post]
 func (h *todoHandler) Create(c *gin.Context) {
@@ -94,7 +94,7 @@ func (h *todoHandler) Create(c *gin.Context) {
 		return
 	}
 
-	ResponseOK(c, result)
+	ResponseCreated(c, result)
 }
 
 // @Summary Update todo task by ID
@@ -104,7 +104,7 @@ func (h *todoHandler) Create(c *gin.Context) {
 // @Produce json
 // @Param id path string true "Todo ID"
 // @Param request body service.UpdateTodoRequest true "update todo request body"
-// @Success 200 {object} Response{result=service.TodoResponse} "List of todo items"
+// @Success 200 {object} Response{result=service.TodoResponse} "Updated todo task"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo/{id} [put]
 func (h *todoHandler) Update(c *gin.Context) {
@@ -130,7 +130,7 @@ func (h *todoHandler) Update(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path string true "Todo ID"
-// @Success 200 {object} Response "List of todo items"
+// @Success 200 {object} Response "Successful response"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo/{id}/in-progress [patch]
 func (h *todoHandler) SetInProgress(c *gin.Context) {
@@ -149,7 +149,7 @@ func (h *todoHandler) SetInProgress(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path string true "Todo ID"
-// @Success 200 {object} Response "List of todo items"
+// @Success 200 {object} Response "Successful response"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo/{id}/completed [patch]
 func (h *todoHandler) SetCompleted(c *gin.Context) {
@@ -168,7 +168,7 @@ func (h *todoHandler) SetCompleted(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param id path string true "Todo ID"
-// @Success 200 {object} Response "List of todo items"
+// @Success 200 {object} Response "Successful response"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo/{id} [delete]
 func (h *todoHandler) Delete(c *gin.Context) {

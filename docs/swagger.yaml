@@ -127,8 +127,8 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
-          description: List of todo items
+        "201":
+          description: Created todo task
           schema:
             allOf:
             - $ref: '#/definitions/handler.Response'
@@ -158,7 +158,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: List of todo items
+          description: Successful response
           schema:
             $ref: '#/definitions/handler.Response'
         "500":
@@ -182,7 +182,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: List of todo items
+          description: Founded todo task
           schema:
             allOf:
             - $ref: '#/definitions/handler.Response'
@@ -217,7 +217,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: List of todo items
+          description: Updated todo task
           schema:
             allOf:
             - $ref: '#/definitions/handler.Response'
@@ -247,7 +247,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: List of todo items
+          description: Successful response
           schema:
             $ref: '#/definitions/handler.Response'
         "500":
@@ -272,7 +272,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: List of todo items
+          description: Successful response
           schema:
             $ref: '#/definitions/handler.Response'
         "500":
