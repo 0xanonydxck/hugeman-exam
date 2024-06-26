@@ -17,7 +17,7 @@ func NewMockTodoRepo() *todoMock {
 	return &todoMock{}
 }
 
-func (m *todoMock) All() ([]*model.Todo, error) {
+func (m *todoMock) All(...*AllTodoOption) ([]*model.Todo, error) {
 	args := m.Called()
 	return args.Get(0).([]*model.Todo), args.Error(1)
 }

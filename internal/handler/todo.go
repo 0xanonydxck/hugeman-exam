@@ -30,11 +30,20 @@ func NewTodoHandler(router *gin.RouterGroup, serv service.TodoService) *todoHand
 // @Tags todo
 // @Accept json
 // @Produce json
+// @Param search query string false "Find todo tasks by title or description"
+// @Param sort query string false "Sorting todo tasks by created_at, title, or status"
+// @Param descend query bool false "Sorting todo tasks in descending order"
 // @Success 200 {object} Response{result=[]service.TodoResponse} "List of todo items"
 // @Failure 500 {object} ErrorResponse "Error message"
 // @Router /todo [get]
 func (h *todoHandler) All(c *gin.Context) {
-	result, err := h.serv.All(nil)
+	query := service.AllTodoQuery{}
+	if err := c.ShouldBindQuery(&query); err != nil {
+		ResponseError(c, err)
+		return
+	}
+
+	result, err := h.serv.All(&query)
 	if err != nil {
 		ResponseError(c, err)
 		return

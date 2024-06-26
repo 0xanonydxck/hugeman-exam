@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/dxckboi/hugeman-exam/internal/model"
+	"github.com/dxckboi/hugeman-exam/internal/repo"
 	"github.com/dxckboi/hugeman-exam/pkg/util"
 	"github.com/dxckboi/hugeman-exam/pkg/validator"
 )
@@ -57,4 +58,22 @@ func UpdateTodoRequestToModel(req *UpdateTodoRequest) (*model.Todo, error) {
 	}
 
 	return t, nil
+}
+
+func AllTodoQueryToOption(query *AllTodoQuery) (*repo.AllTodoOption, error) {
+	opt := new(repo.AllTodoOption)
+	if !util.IsEmptyString(query.Search) {
+		opt.Search = &query.Search
+	}
+
+	if !util.IsEmptyString(query.Sort) {
+		if err := validator.Var(query.Sort, "oneof=created_at title status"); err != nil {
+			return nil, err
+		}
+
+		opt.Sort = &query.Sort
+	}
+
+	opt.Descend = query.Descend
+	return opt, nil
 }

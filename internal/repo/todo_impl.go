@@ -1,6 +1,8 @@
 package repo
 
 import (
+	"fmt"
+
 	"github.com/dxckboi/hugeman-exam/internal/model"
 	"github.com/dxckboi/hugeman-exam/pkg/errors"
 	"github.com/gofrs/uuid"
@@ -16,9 +18,32 @@ func NewTodoRepo(db *gorm.DB) *todoRepo {
 	return &todoRepo{db}
 }
 
-func (tr *todoRepo) All() ([]*model.Todo, error) {
+func (tr *todoRepo) All(opts ...*AllTodoOption) ([]*model.Todo, error) {
+	var opt *AllTodoOption
+	if len(opts) == 0 {
+		opt = &AllTodoOption{}
+	} else {
+		opt = opts[0]
+	}
+
+	tx := tr.db.Session(&gorm.Session{})
+	if opt.Search != nil {
+		statement := "title LIKE ? OR description LIKE ?"
+		arg := "%" + *opt.Search + "%"
+		tx = tx.Where(statement, arg, arg)
+	}
+
+	if opt.Sort != nil {
+		sort := *opt.Sort
+		if opt.Descend {
+			sort = fmt.Sprintf("%s %s", sort, "DESC")
+		}
+
+		tx = tx.Order(sort)
+	}
+
 	var todos []*model.Todo
-	if err := tr.db.Find(&todos).Error; err != nil {
+	if err := tx.Find(&todos).Error; err != nil {
 		return nil, errors.ParsePostgresError(err)
 	}
 

@@ -28,6 +28,26 @@ const docTemplate = `{
                     "todo"
                 ],
                 "summary": "Get all todo tasks",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Find todo tasks by title or description",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sorting todo tasks by created_at, title, or status",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Sorting todo tasks in descending order",
+                        "name": "descend",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of todo items",

@@ -79,6 +79,19 @@ paths:
       consumes:
       - application/json
       description: retrieves a list of all todo tasks.
+      parameters:
+      - description: Find todo tasks by title or description
+        in: query
+        name: search
+        type: string
+      - description: Sorting todo tasks by created_at, title, or status
+        in: query
+        name: sort
+        type: string
+      - description: Sorting todo tasks in descending order
+        in: query
+        name: descend
+        type: boolean
       produces:
       - application/json
       responses:

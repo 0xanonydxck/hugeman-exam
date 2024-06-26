@@ -6,7 +6,7 @@ import (
 )
 
 type TodoRepo interface {
-	All() ([]*model.Todo, error)
+	All(...*AllTodoOption) ([]*model.Todo, error)
 	Get(id uuid.UUID) (*model.Todo, error)
 	Create(todo *model.Todo) error
 	Update(id uuid.UUID, todo *model.Todo) (*model.Todo, error)

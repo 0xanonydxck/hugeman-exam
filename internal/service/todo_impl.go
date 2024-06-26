@@ -20,7 +20,13 @@ func NewTodoService(repo repo.TodoRepo) *todoService {
 }
 
 func (s *todoService) All(query *AllTodoQuery) ([]*TodoResponse, error) {
-	todos, err := s.repo.All()
+	opt, err := AllTodoQueryToOption(query)
+	if err != nil {
+		log.Error().Err(err).Msg("service::All() - failed to map query to option")
+		return nil, err
+	}
+
+	todos, err := s.repo.All(opt)
 	if err != nil {
 		log.Error().Err(err).Msg("service::All() - failed to get all todo tasks")
 		return nil, err
