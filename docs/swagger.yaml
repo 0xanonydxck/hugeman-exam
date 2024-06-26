@@ -67,13 +67,8 @@ definitions:
       image:
         type: string
       status:
-        enum:
-        - IN_PROGRESS
-        - COMPLETED
         type: string
       title:
-        maxLength: 100
-        minLength: 3
         type: string
     type: object
 info:

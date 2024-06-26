@@ -23,10 +23,10 @@ type CreateTodoRequest struct {
 }
 
 type UpdateTodoRequest struct {
-	Title       string `json:"title" validate:"min=3,max=100"`
+	Title       string `json:"title"`
 	Description string `json:"description"`
-	Image       string `json:"image" validate:"base64|datauri"`
-	Status      string `json:"status" validate:"oneof=IN_PROGRESS COMPLETED"`
+	Image       string `json:"image"`
+	Status      string `json:"status"`
 }
 
 type AllTodoQuery struct {

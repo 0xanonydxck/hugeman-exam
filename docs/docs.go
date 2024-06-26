@@ -428,16 +428,10 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
-                    "type": "string",
-                    "enum": [
-                        "IN_PROGRESS",
-                        "COMPLETED"
-                    ]
+                    "type": "string"
                 },
                 "title": {
-                    "type": "string",
-                    "maxLength": 100,
-                    "minLength": 3
+                    "type": "string"
                 }
             }
         }
