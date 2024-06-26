@@ -1,0 +1,10 @@
+app:
+  name: Hugeman Exam
+  port: 8080
+
+db:
+  host: localhost
+  port: 5432
+  user: root
+  password: password
+  dbname: postgres
